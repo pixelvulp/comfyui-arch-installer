@@ -5,6 +5,8 @@
 # ==============================================================================
 
 # 1. Dependency Check
+grep -q avx /proc/cpuinfo && echo "AVX supported" || echo "No AVX - kornia workaround required"
+
 MISSING_PKGS=""
 for pkg in zenity git python; do
     if ! command -v "$pkg" &> /dev/null; then
