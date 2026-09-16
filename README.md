@@ -36,28 +36,7 @@ Follow the dialogs: pick an install directory, pick your GPU type, and let it ru
 
 ### `Fatal Python error: Illegal instruction` on startup
 
-This comes from `kornia_rs`, a dependency pulled in by ComfyUI's built-in post-processing nodes. The published `kornia_rs` wheel is compiled assuming at least AVX/AVX2/FMA3 CPU support. On older CPUs (pre-2011, before AVX existed) — or in some VM/container setups where the hypervisor doesn't pass those CPU flags through to the guest — importing it crashes the whole process before ComfyUI even starts.
-
-**Check if this affects you:**
-
-```fish
-grep flags /proc/cpuinfo | head -1 | tr ' ' '\n' | grep -E 'avx|fma'
-```
-
-If this prints nothing, your CPU (or your VM's exposed CPU flags) lacks AVX/FMA support.
-
-**Fix — remove the offending package** (a few post-processing nodes will be unavailable, everything else works normally):
-
-```fish
-source venv/bin/activate.fish
-pip uninstall -y kornia kornia_rs
-```
-
-If your CPU *does* support AVX2/FMA (the grep above prints something) but you're still crashing, try rebuilding `kornia_rs` from source instead, which requires a Rust toolchain (`cargo`):
-
-```fish
-pip install kornia-rs --force-reinstall --no-cache-dir --no-binary :all:
-```
+This comes from `kornia_rs`, a dependency pulled in by ComfyUI's built-in post-processing nodes. The published `kornia_rs` wheel is compiled assuming at least AVX/AVX2/FMA3 CPU support. On older CPUs (pre-2011, before AVX existed) — or in some VM/container setups where the hypervisor doesn't pass those CPU flags through to the guest — importing it crashes the whole process before ComfyUI even starts. this was fixed in v1.1.0
 
 ### GPU not fully utilized / "does not include kernels for this GPU" warning
 
