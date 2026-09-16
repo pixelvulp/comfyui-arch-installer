@@ -5,8 +5,13 @@
 # ==============================================================================
 
 # 1. Dependency Check
-grep -q avx /proc/cpuinfo && echo "AVX supported" || echo "No AVX - kornia workaround required. Run source venv/bin/activate.fish
-pip uninstall -y kornia kornia_rs"
+if grep -q avx /proc/cpuinfo; then
+    echo "AVX supported"
+    NEEDS_KORNIA_FIX=false
+else
+    echo "No AVX detected - kornia workaround will be applied automatically after install"
+    NEEDS_KORNIA_FIX=true
+fi
 
 MISSING_PKGS=""
 for pkg in zenity git python; do 2>/dev/null
@@ -75,6 +80,12 @@ LOG_FILE="/tmp/comfyui_install.log"
     echo "80"
     echo "# Installing ComfyUI dependencies..."
     pip install -r requirements.txt >> "$LOG_FILE" 2>&1 || exit 1
+
+    if [ "$NEEDS_KORNIA_FIX" = true ]; then
+        echo "90"
+        echo "# No AVX detected - removing kornia (workaround)..."
+        pip uninstall -y kornia kornia_rs >> "$LOG_FILE" 2>&1
+    fi
 
     echo "95"
     echo "# Creating Fish launch script..."
