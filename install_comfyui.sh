@@ -5,7 +5,8 @@
 # ==============================================================================
 
 # 1. Dependency Check
-grep -q avx /proc/cpuinfo && echo "AVX supported" || echo "No AVX - kornia workaround required"
+grep -q avx /proc/cpuinfo && echo "AVX supported" || echo "No AVX - kornia workaround required. Run source venv/bin/activate.fish
+pip uninstall -y kornia kornia_rs"
 
 MISSING_PKGS=""
 for pkg in zenity git python; do 2>/dev/null
