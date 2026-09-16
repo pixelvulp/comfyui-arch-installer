@@ -1,10 +1,10 @@
-# Maintainer: queenoffiends <https://github.com/queenoffiends>
+# Maintainer: pixelvulp <https://github.com/pixelvulp>
 pkgname=comfyui-arch-installer
 pkgver=1.1.0
 pkgrel=1
 pkgdesc="GUI installer script for ComfyUI on Arch Linux (Fish Shell Edition)"
 arch=('any')
-url="https://github.com/queenoffiends/comfyui-arch-installer"
+url="https://github.com/pixelvulp/comfyui-arch-installer"
 license=('MIT')
 depends=('bash' 'zenity' 'git' 'python' 'fish')
 optdepends=(
