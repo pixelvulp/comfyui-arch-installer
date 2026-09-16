@@ -36,7 +36,12 @@ Follow the dialogs: pick an install directory, pick your GPU type, and let it ru
 
 ### `Fatal Python error: Illegal instruction` on startup
 
-This comes from `kornia_rs`, a dependency pulled in by ComfyUI's built-in post-processing nodes. The published `kornia_rs` wheel is compiled assuming at least AVX/AVX2/FMA3 CPU support. On older CPUs (pre-2011, before AVX existed) — or in some VM/container setups where the hypervisor doesn't pass those CPU flags through to the guest — importing it crashes the whole process before ComfyUI even starts. this was fixed in v1.1.0
+This comes from `kornia_rs`, a dependency pulled in by ComfyUI's built-in post-processing nodes. The published `kornia_rs` wheel is compiled assuming at least AVX/AVX2/FMA3 CPU support. On older CPUs (pre-2011, before AVX existed) importing it crashes the whole process before ComfyUI even starts. this, however, was fixed in v1.1.0. if your build predates v1.1.0 run
+
+```fish
+source venv/bin/activate.fish
+pip uninstall -y kornia kornia_rs
+```
 
 ### GPU not fully utilized / "does not include kernels for this GPU" warning
 
