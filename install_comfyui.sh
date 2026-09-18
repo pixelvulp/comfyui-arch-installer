@@ -65,7 +65,7 @@ LOG_FILE="/tmp/comfyui_install.log"
 
     echo "40"
     echo "# Activating virtual environment..."
-    source venv/bin/activate || exit 1
+    source venv/bin/activate.fish || exit 1
 
     echo "50"
     echo "# Installing PyTorch for $GPU_TYPE (This will take a while)..."
