@@ -1,4 +1,4 @@
-# ComfyUI GUI Installer for Arch Linux (Fish Shell Edition)
+# ComfyUI GUI Installer for Arch Linux
 
 A one-click, GUI-driven installer for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) on Arch Linux, built with `zenity` dialogs and producing a ready-to-use [Fish shell](https://fishshell.com/) launch script.
 
