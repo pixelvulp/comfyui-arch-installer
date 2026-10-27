@@ -66,4 +66,4 @@ All install output is captured in `/tmp/comfyui_install.log`. If the installer r
 
 ## License
 
-MIT (or update to match your preferred license).
+MIT
